@@ -1,33 +1,70 @@
 .note-container {
-    padding: 10px;
-    margin: 20px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  .note-title {
-    color: #333;
-  }
-  
-  .note-content {
-    color: #666;
-  }
-  
-  .note-date {
-    color: #999;
+    background-color: var(--bg-light);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: 20px;
+    margin-bottom: 20px;
+    position: relative;
+    transition: var(--transition);
+    border-left: 4px solid var(--primary-color);
+    animation: fadeIn 0.5s ease-out;
+}
+
+.note-container:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.note-title {
+    color: var(--text-color);
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    padding-right: 40px;
+}
+
+.note-content {
+    color: var(--text-light);
+    margin-bottom: 15px;
+    line-height: 1.6;
+    white-space: pre-wrap;
+}
+
+.note-date {
+    color: var(--text-lighter);
     font-size: 0.8rem;
-  }
-  
-  .delete-button {
-    background-color: #f44336; /* Red */
-    color: white;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.note-date::before {
+    content: "📅";
+    margin-right: 5px;
+}
+
+.delete-button {
+    background-color: transparent;
+    color: var(--text-lighter);
     border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
+    padding: 8px;
+    border-radius: 50%;
     cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .delete-button:hover {
-    background-color: #d32f2f; /* Darker red */
-  }
+    transition: var(--transition);
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.delete-button:hover {
+    background-color: rgba(244, 67, 54, 0.1);
+    color: var(--danger);
+}
+
+.delete-button::before {
+    content: "🗑️";
+    font-size: 1.2rem;
+}

@@ -5,6 +5,8 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import NotFound from './pages/NotFound';
 import ProtectedRoute from './components/ProtectedRoute';
+import Layout from './components/Layout';
+import './styles/Layout.css';
 
 function Logout() {
   localStorage.clear();
@@ -17,19 +19,34 @@ function RegisterAndLogout() { //clear localStorage, so no old access token is u
 }
 
 function App() {
-
   return (
-    <>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<ProtectedRoute><Home /></ProtectedRoute>} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/logout" element={<Logout />} />
-          <Route path="/register" element={<RegisterAndLogout />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={
+          <ProtectedRoute>
+            <Layout>
+              <Home />
+            </Layout>
+          </ProtectedRoute>
+        } />
+        <Route path="/login" element={
+          <Layout>
+            <Login />
+          </Layout>
+        } />
+        <Route path="/logout" element={<Logout />} />
+        <Route path="/register" element={
+          <Layout>
+            <RegisterAndLogout />
+          </Layout>
+        } />
+        <Route path="*" element={
+          <Layout>
+            <NotFound />
+          </Layout>
+        } />
+      </Routes>
+    </BrowserRouter>
   )
 }
 

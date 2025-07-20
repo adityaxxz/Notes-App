@@ -1,6 +1,6 @@
 import { useState } from "react";
 import api from "../api";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../constants";
 import "../styles/Form.css";
 import LoadingIndicator from "./LoadingIndicator";
@@ -68,28 +68,38 @@ function Form({ route, method }) {
         }
     }
 
-    return <form onSubmit={handleSubmit} className="form-container">
-        <h1>{name}</h1>
-        {error && <div className="error-message" style={{color: "red", margin: "10px 0", whiteSpace: "pre-line"}}>{error}</div>}
-        
-        <input className="form-input" 
-        type="text" 
-        value={username} 
-        placeholder="Username" 
-        required
-        onChange={(e) => setUsername(e.target.value)} />
+    return (
+        <form onSubmit={handleSubmit} className="form-container">
+            <h1>{name}</h1>
+            {error && <div className="error-message">{error}</div>}
+            
+            <input className="form-input" 
+            type="text" 
+            value={username} 
+            placeholder="Username" 
+            required
+            onChange={(e) => setUsername(e.target.value)} />
 
-        <input className="form-input" 
-        type="password" 
-        value={password} 
-        placeholder="Password" 
-        required
-        onChange={(e) => setPassword(e.target.value)} />
+            <input className="form-input" 
+            type="password" 
+            value={password} 
+            placeholder="Password" 
+            required
+            onChange={(e) => setPassword(e.target.value)} />
 
-        {loading && <LoadingIndicator />}
-        
-        <button className="form-button" type="submit" disabled={loading}>{name}</button>
-    </form>
+            {loading && <LoadingIndicator />}
+            
+            <button className="form-button" type="submit" disabled={loading}>{name}</button>
+            
+            <div className="form-footer">
+                {method === "login" ? (
+                    <p>Don't have an account? <Link to="/register">Register</Link></p>
+                ) : (
+                    <p>Already have an account? <Link to="/login">Login</Link></p>
+                )}
+            </div>
+        </form>
+    );
 }
 
 export default Form;
